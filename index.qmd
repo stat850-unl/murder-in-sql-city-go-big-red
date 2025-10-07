@@ -68,13 +68,13 @@ purrr::walk(table_names, function(x) {
 
 library(dplyr)
 library(stringr)
-#glimpse(crime_scene_report)
-#glimpse(person)
-#glimpse(interview)
-#glimpse(drivers_license)
-#glimpse(facebook_event_checkin)
-#glimpse(get_fit_now_check_in)
-#glimpse(get_fit_now_member)
+#head(crime_scene_report)
+#head(person)
+#glimpse(interview) - used
+#head(drivers_license)
+#head(facebook_event_checkin)
+#head(get_fit_now_check_in)
+#head(get_fit_now_member)
 
 SQLCity <- crime_scene_report %>%
   filter(type == "murder", city == "SQL City", date == "20180115")
@@ -91,6 +91,25 @@ Second$name[1]
 WitnessInterview <- interview %>% filter(person_id %in% c("14887", "16371"))
 WitnessInterview
 
+Gym_48Z <- get_fit_now_member %>%
+       filter(membership_status == "gold" & grepl("48Z", id) | grepl("Annabel",name))
+Gym_48Z
+
+Gym_Checkin <- get_fit_now_check_in %>% filter(membership_id %in% c("48Z7A","48Z55","90081"))
+Gym_Checkin
+#Two suspects: Joe Germuska, Jeremy Bowers
+
+Car <- drivers_license %>% filter(gender == "male" & grepl("H42W",plate_number))
+Car
+
+Facebook <- facebook_event_checkin %>% filter(person_id %in% c("28819","67318") & date == "20180115")
+Facebook
+
+#Plate numbers with H42W to specific person
+Person <- person %>% filter(license_id %in% c("423327", "664760"))
+Person
+
+print("The suspect is Jeremy Bowers.")
 # close the connection when you're done
 dbDisconnect(con)
 ```
