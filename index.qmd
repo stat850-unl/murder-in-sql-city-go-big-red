@@ -105,7 +105,7 @@ Car
 Facebook <- facebook_event_checkin %>% filter(person_id %in% c("28819","67318") & date == "20180115")
 Facebook
 
-#Plate numbers with H42W to specific person
+#Plate numbers with H42W to specific person (according to license id)
 Person <- person %>% filter(license_id %in% c("423327", "664760"))
 Person
 
