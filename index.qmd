@@ -2,7 +2,7 @@
 title: "Homework: Murder in SQL City"
 execute:
   error: true
-author: "Your Name"
+author: "Zora Zhang, Thu Dang, Sukainah Rawashdeh"
 output: html_document
 ---
 
@@ -38,9 +38,7 @@ Hints:
 - You can use a lot of filter statements, but it will in many cases be easier to use joins. 
 - See if you can write code that doesn't require you to type out knowledge gained from a previous clue (e.g. pipe your results from one query into the next)
 
-
 ***
-
 A crime has taken place and the detective needs your help. The detective gave you the crime scene report, but you somehow lost it. You vaguely remember that the crime was a murder that occurred sometime on January 15, 2018 and that it took place in SQL City. All the clues to this mystery are buried in a huge database, and you need to use R and SAS to navigate through this network of information. Your first step to solving the mystery is to retrieve the corresponding crime scene report from the police department's database. 
 
 This database schema may help you figure out how to navigate the database:
@@ -54,7 +52,6 @@ library(DBI)
 
 # Your database connection code goes here. Store the connection as con 
 con <- dbConnect(RSQLite::SQLite(), "sql-murder-mystery.db")
-
 table_names <- c("crime_scene_report", 
                  "drivers_license", 
                  "facebook_event_checkin",
@@ -69,32 +66,32 @@ purrr::walk(table_names, function(x) {
   assign(x, dbReadTable(con, x), envir = .GlobalEnv)
 })
 
+library(dplyr)
+library(stringr)
+#glimpse(crime_scene_report)
+#glimpse(person)
+#glimpse(interview)
+#glimpse(drivers_license)
+#glimpse(facebook_event_checkin)
+#glimpse(get_fit_now_check_in)
+#glimpse(get_fit_now_member)
+
+SQLCity <- crime_scene_report %>%
+  filter(type == "murder", city == "SQL City", date == "20180115")
+SQLCity
+
+First <- person %>% filter(address_street_name == "Northwestern Dr") %>% arrange(desc(address_number))
+First$id[1]
+First$name[1]
+
+Second <- person %>% filter(grepl("Annabel",name))
+Second$id[1]
+Second$name[1]
+
+WitnessInterview <- interview %>% filter(person_id %in% c("14887", "16371"))
+WitnessInterview
+
 # close the connection when you're done
 dbDisconnect(con)
 ```
 
-
-
-## Python
-
-```{python table-setup-py}
-import pandas as pd
-import sqlite3
-
-# Read sqlite query results into a pandas DataFrame
-con = sqlite3.connect("sql-murder-mystery.db")
-
-crime_scene_report = pd.read_sql_query("SELECT * from crime_scene_report", con)
-drivers_license = pd.read_sql_query("SELECT * from drivers_license", con)
-facebook_event_checkin = pd.read_sql_query("SELECT * from facebook_event_checkin", con)
-get_fit_now_check_in = pd.read_sql_query("SELECT * from get_fit_now_check_in", con)
-get_fit_now_member = pd.read_sql_query("SELECT * from get_fit_now_member", con)
-income = pd.read_sql_query("SELECT * from income", con)
-interview = pd.read_sql_query("SELECT * from interview", con)
-person = pd.read_sql_query("SELECT * from person", con)
-
-# Verify that result of SQL query is stored in the dataframe
-print(crime_scene_report.head())
-
-con.close()
-```
