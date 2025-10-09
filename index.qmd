@@ -128,7 +128,7 @@ Miranda_Interview <- interview %>% filter(person_id == "99716")
 Facebook_Jeremy <- facebook_event_checkin %>% filter(person_id == "67318")
 Facebook_Jeremy
 
-print("Miranda Priestly probably met Jeremy in the SQL Symphony Concert in 2017-12-06. She is the most likely to have hired Jeremy Bowers for the murder. Crime solved!")
+print("Miranda Priestly probably met Jeremy in the SQL Symphony Concert in 2017-12-06. She is the most likely to have hired Jeremy Bowers for the murder. Jeremy Bowers is the murderer. Crime solved!")
 
 #Concert_other_people
 #person_id 69325 is also in 20171206 concert
@@ -140,7 +140,6 @@ print("Miranda Priestly probably met Jeremy in the SQL Symphony Concert in 2017-
 #Tyson_car <- drivers_license %>% filter(id == "142413")
 #Tyson_car
 #Tyson: 50 yo, 78", amber eye, green hair, plate_number LMTC00, Audi S4
-
 # close the connection when you're done
 dbDisconnect(con)
 ```
