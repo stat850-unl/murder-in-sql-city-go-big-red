@@ -117,7 +117,7 @@ Jeremy_lady
 
 Redhair_person_id <- person %>% filter(license_id %in% c("202298", "291182","918773"))
 Redhair_person_id
-
+# 3 redhair Tesla drivers: 78881, 90700, 99716
 
 Redhair_Fb <- facebook_event_checkin %>% filter(person_id %in% c("78881","90700","99716"))
 Redhair_Fb
@@ -129,7 +129,6 @@ Facebook_Jeremy <- facebook_event_checkin %>% filter(person_id == "67318")
 Facebook_Jeremy
 
 print("Miranda Priestly probably met Jeremy in the SQL Symphony Concert in 2017-12-06. She is the most likely to have hired Jeremy Bowers for the murder. Crime solved!")
-
 
 #Concert_other_people
 #person_id 69325 is also in 20171206 concert
