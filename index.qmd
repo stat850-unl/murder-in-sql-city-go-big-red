@@ -70,7 +70,7 @@ library(dplyr)
 library(stringr)
 #head(crime_scene_report)
 #head(person)
-#glimpse(interview) - used
+#head(interview)
 #head(drivers_license)
 #head(facebook_event_checkin)
 #head(get_fit_now_check_in)
@@ -97,7 +97,7 @@ Gym_48Z
 
 Gym_Checkin <- get_fit_now_check_in %>% filter(membership_id %in% c("48Z7A","48Z55","90081"))
 Gym_Checkin
-#Two suspects: Joe Germuska, Jeremy Bowers
+#Two suspects: Joe Germuska, Jeremy Bowers: 67318
 
 Car <- drivers_license %>% filter(gender == "male" & grepl("H42W",plate_number))
 Car
@@ -109,7 +109,38 @@ Facebook
 Person <- person %>% filter(license_id %in% c("423327", "664760"))
 Person
 
-print("The suspect is Jeremy Bowers.")
+Jeremy_interview <- interview %>% filter(person_id == "67318")
+Jeremy_interview
+
+Jeremy_lady <- drivers_license %>% filter(gender == "female" & hair_color == "red" & car_make == "Tesla")
+Jeremy_lady
+
+Redhair_person_id <- person %>% filter(license_id %in% c("202298", "291182","918773"))
+Redhair_person_id
+
+
+Redhair_Fb <- facebook_event_checkin %>% filter(person_id %in% c("78881","90700","99716"))
+Redhair_Fb
+#Miranda Priestly id: 99716 license_id: 202298 Address: 1883 Golden Ave
+
+Miranda_Interview <- interview %>% filter(person_id == "99716")
+
+Facebook_Jeremy <- facebook_event_checkin %>% filter(person_id == "67318")
+Facebook_Jeremy
+
+print("Miranda Priestly probably met Jeremy in the SQL Symphony Concert in 2017-12-06. She is the most likely to have hired Jeremy Bowers for the murder. Crime solved!")
+
+
+#Concert_other_people
+#person_id 69325 is also in 20171206 concert
+#Concert_3rd_Person_Interview <- interview %>% filter(person_id == "69325")
+#Concert_3rd_Person_Interview
+#Concert_3rd_Person <- person %>% filter(id == "69325")
+#Concert_3rd_Person
+#Tyson Ojard person_id 69325 3187 Fletcher Way license id: 142413
+#Tyson_car <- drivers_license %>% filter(id == "142413")
+#Tyson_car
+#Tyson: 50 yo, 78", amber eye, green hair, plate_number LMTC00, Audi S4
 
 # close the connection when you're done
 dbDisconnect(con)
