@@ -110,6 +110,7 @@ Person <- person %>% filter(license_id %in% c("423327", "664760"))
 Person
 
 print("The suspect is Jeremy Bowers.")
+
 # close the connection when you're done
 dbDisconnect(con)
 ```
